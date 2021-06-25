@@ -1,8 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:table/constructor/clientes_exemplos.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+import 'package:flutter/material.dart';
+
+part 'clientes.g.dart';
+
+@JsonSerializable()
 class Clientes with ChangeNotifier {
   final String empresas;
   final String id;
@@ -16,14 +20,8 @@ class Clientes with ChangeNotifier {
     required this.usuariosVinculados,
   });
 
-  factory Clientes.fromJson(json) {
-    return Clientes(
-        empresas: json['empresas'],
-        id: json['id'],
-        totalCaixas: json['totalCaixas'],
-        usuariosVinculados: json['usuariosVinculados']);
-  }
+  factory Clientes.fromJson(Map<String, dynamic> json) =>
+      _$ClientesFromJson(json);
 
-  // var json = jsonDecode(exemplosClientes);
-
+  Map<String, dynamic> toJson() => _$ClientesToJson(this);
 }

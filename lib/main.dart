@@ -2,52 +2,70 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:json_table/json_table.dart';
-import 'package:table/constructor/clientes_getter.dart';
 
-import 'constructor/clientes.dart';
-import 'constructor/clientes_exemplos.dart';
+part 'usuario.g.dart';
 
-List<Clientes> parseClientes(String listaDeEmpresas){
-  final parsed = jsonDecode(listaDeEmpresas).cast<Map<String, dynamic>>();
+void main() => runApp(SimpleTable());
 
-  return parsed.map<Clientes>((json) => Clientes.fromJson(json)).toList();
-}
-void main() => runApp(TabelaTeste());
-
-class TabelaTeste extends StatefulWidget {
-  const TabelaTeste({Key? key}) : super(key: key);
-
+class SimpleTable extends StatefulWidget {
   @override
-  _TabelaTesteState createState() => _TabelaTesteState();
+  _SimpleTableState createState() => _SimpleTableState();
 }
 
-class _TabelaTesteState extends State<TabelaTeste> {
+class _SimpleTableState extends State<SimpleTable> {
   bool toggle = true;
 
   @override
   Widget build(BuildContext context) {
+    var json = jsonDecode();
     return MaterialApp(
-      title: 'Testes Pré-Construção',
-      home: Scaffold(
-            appBar: AppBar(
-              title: Center(
-                child: Text('Testes Pré-Construção'),
-              ),         
-        ),
+        title: 'AppTest',
+        home: Scaffold(
+          appBar: AppBar(title: Center(child: Text('AppTeste'))),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(16.0),
           child: Container(
-            child: toggle 
-              ? Column(
-                children: [
-                  JsonTable(
-                    
+            child: toggle
+                ? Column(
+                    children: [
+                      JsonTable(
+                        json,
+                        showColumnToggle: true,
+                        allowRowHighlight: true,
+                        rowHighlightColor: Colors.yellow[500]!.withOpacity(0.7),
+                        paginationRowCount: 4,
+                        onRowSelect: (index, map) {
+                          print(index);
+                          print(map);
+                        },
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Text("Simple table which creates table direclty from json")
+                    ],
                   )
-                ],
-              ),
+                : Center(
+                    child: Text(getPrettyJSONString(jsonSample)),
+                  ),
           ),
-        )
+        ),
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.grid_on),
+            onPressed: () {
+              setState(
+                () {
+                  toggle = !toggle;
+                },
+              );
+            }),
       ),
     );
+  }
+
+  String getPrettyJSONString(jsonObject) {
+    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    String jsonString = encoder.convert(json.decode(jsonObject));
+    return jsonString;
   }
 }

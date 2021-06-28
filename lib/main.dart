@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+
 import 'package:flutter/material.dart';
+
 import 'package:json_table/json_table.dart';
 
-part 'usuario.g.dart';
+
 
 void main() => runApp(SimpleTable());
 
@@ -15,10 +17,17 @@ class SimpleTable extends StatefulWidget {
 class _SimpleTableState extends State<SimpleTable> {
   bool toggle = true;
 
+  final String jsonExemplo = '[{"empresas" : "CBSI", "id" : "xxxx","totalCaixas" : "NULL","usuariosVinculados" : "NULL"},'
+  '{ "empresas" : "CBSI", "id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"},'
+  '{"empresas" : "CBSI","id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"},'
+  '{"empresas" : "CBSI", "id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"},'
+  '{"empresas" : "CBSI", "id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"}]';
+
+
   @override
   Widget build(BuildContext context) {
-    var json = jsonDecode();
-    return MaterialApp(
+      var jsonClientes = jsonDecode(jsonExemplo);
+      return MaterialApp(
         title: 'AppTest',
         home: Scaffold(
           appBar: AppBar(title: Center(child: Text('AppTeste'))),
@@ -29,7 +38,7 @@ class _SimpleTableState extends State<SimpleTable> {
                 ? Column(
                     children: [
                       JsonTable(
-                        json,
+                        jsonClientes,
                         showColumnToggle: true,
                         allowRowHighlight: true,
                         rowHighlightColor: Colors.yellow[500]!.withOpacity(0.7),
@@ -46,7 +55,7 @@ class _SimpleTableState extends State<SimpleTable> {
                     ],
                   )
                 : Center(
-                    child: Text(getPrettyJSONString(jsonSample)),
+                    child: Text(getPrettyJSONString(jsonClientes)),
                   ),
           ),
         ),

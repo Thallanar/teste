@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
@@ -24,4 +24,5 @@ class Clientes with ChangeNotifier {
       _$ClientesFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClientesToJson(this);
+  
 }

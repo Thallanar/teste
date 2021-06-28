@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-
 import 'package:flutter/material.dart';
 
 import 'package:json_table/json_table.dart';
-
-
+import 'package:table/constructor/getting.dart';
 
 void main() => runApp(SimpleTable());
 
@@ -17,20 +15,13 @@ class SimpleTable extends StatefulWidget {
 class _SimpleTableState extends State<SimpleTable> {
   bool toggle = true;
 
-  final String jsonExemplo = '[{"empresas" : "CBSI", "id" : "xxxx","totalCaixas" : "NULL","usuariosVinculados" : "NULL"},'
-  '{ "empresas" : "CBSI", "id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"},'
-  '{"empresas" : "CBSI","id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"},'
-  '{"empresas" : "CBSI", "id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"},'
-  '{"empresas" : "CBSI", "id" : "xxxx", "totalCaixas" : "NULL", "usuariosVinculados" : "NULL"}]';
-
-
   @override
   Widget build(BuildContext context) {
-      var jsonClientes = jsonDecode(jsonExemplo);
-      return MaterialApp(
-        title: 'AppTest',
-        home: Scaffold(
-          appBar: AppBar(title: Center(child: Text('AppTeste'))),
+    var jsonClientes = jsonDecode(jsonExemplo);
+    return MaterialApp(
+      title: 'AppTest',
+      home: Scaffold(
+        appBar: AppBar(title: Center(child: Text('AppTeste'))),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(16.0),
           child: Container(
@@ -51,7 +42,8 @@ class _SimpleTableState extends State<SimpleTable> {
                       SizedBox(
                         height: 40.0,
                       ),
-                      Text("Simple table which creates table direclty from json")
+                      Text(
+                          "Simple table which creates table direclty from json")
                     ],
                   )
                 : Center(

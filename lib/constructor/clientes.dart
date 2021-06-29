@@ -20,8 +20,7 @@ class Clientes with ChangeNotifier {
     required this.usuariosVinculados,
   });
 
-  factory Clientes.fromJson(Map<String, dynamic> json) =>
-      _$ClientesFromJson(json);
+  factory Clientes.fromJson(Map<String, dynamic> json) => _$ClientesFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClientesToJson(this);
   

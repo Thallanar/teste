@@ -33,7 +33,7 @@ class _SimpleTableState extends State<SimpleTable> {
                         showColumnToggle: true,
                         allowRowHighlight: true,
                         rowHighlightColor: Colors.yellow[500]!.withOpacity(0.7),
-                        paginationRowCount: 4,
+                        paginationRowCount: 10,
                         onRowSelect: (index, map) {
                           print(index);
                           print(map);
@@ -42,8 +42,6 @@ class _SimpleTableState extends State<SimpleTable> {
                       SizedBox(
                         height: 40.0,
                       ),
-                      Text(
-                          "Simple table which creates table direclty from json")
                     ],
                   )
                 : Center(
